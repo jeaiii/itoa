@@ -3,38 +3,43 @@
 #include <iostream>
 #include <string>
 
-
-
-#define D(N) { b += N;  uint64_t t = (1LL << (32 + N*3)) / uint32_t(1e##N) + 1; t *= i; t += 1LL << (N*3); i = uint32_t(t >> (32 + N*3)); n = uint32_t(t >> (N*3)); goto i##N;  }
-
+#define D(N,B) { b += N; t = (1LL << (32 + B)) / uint32_t(1e##N) + 1; t *= i; (B) && (t += 1LL << (B)); i = uint32_t(t >> (32 + B)); n = uint32_t(t >> (B)); goto i##N; }
 
 char* itoa(char *b, uint32_t i)
 {
     uint32_t n;
-
-    if (i < 100) {
-        if (i < 10) { goto i0; }
-        { b += 1;  uint64_t t = 429496729 + 1; t *= i; i = uint32_t(t >> 32); n = uint32_t(t); goto i1;  }
-    }
-
-    if (i < 1000000) {
-        if (i < 10000) {
-            if (i < 1000) { b += 2;  uint64_t t = 42949672 + 1; t *= i; i = uint32_t(t >> 32); n = uint32_t(t); goto i2; }
-            { b += 3;  uint64_t t = 4294967 + 1; t *= i; i = uint32_t(t >> 32); n = uint32_t(t); goto i3;  }
-        }
-        if (i < 100000) { b += 4;  uint64_t t = 429496 + 1; t *= i; i = uint32_t(t >> 32); n = uint32_t(t); goto i4; }
-        D(5)
-    }
-    if (i < 100000000) {
-        if (i < 10000000) D(6) 
-            D(7)
-    }
-    if (i < 1000000000) D(8)
-    { b += 9;  uint64_t t = (1LL << (32 + 29)) / uint32_t(1e9) + 0; t *= i; t += 1LL << (31); i = uint32_t(t >> (32 + 29)); n = uint32_t(t >> (29)); }
-
     uint64_t t;
 
+    if (i < 100) {
+        if (i < 10) goto i0;
+        D(1, 0)
+    }
+
+    if (i < 1000000)
+    {
+        if (i < 10000)
+        {
+            if (i < 1000)
+                D(2, 0)
+            D(3, 0)
+        }
+        if (i < 100000)
+            D(4,0)
+        D(5, 15)
+    }
+    if (i < 100000000)
+    {
+        if (i < 10000000)
+            D(6, 18)
+        D(7, 21)
+    }
+    if (i < 1000000000)
+        D(8, 24)
+
+    { b += 9; t = (1LL << (32 + 29)) / uint32_t(1e9) + 0; t *= i; t += 1LL << (31); i = uint32_t(t >> (32 + 29)); n = uint32_t(t >> (29)); }
+
 #define T { t = 10; t *= n; i = uint32_t(t >> 32); n = uint32_t(t); }
+
     b[-9] = i + '0'; T
 i8: b[-8] = i + '0'; T
 i7: b[-7] = i + '0'; T
@@ -51,7 +56,8 @@ i0: b[ 0] = i + '0';
 }
 
 char* itoa(char* b, int32_t i) {
-    if (i < 0) *b++ = '-', i=-i;
+    if (i < 0) 
+        *b++ = '-', i=-i;
     return itoa(b, uint32_t(i));
 }
 
@@ -60,8 +66,6 @@ bool same(uint32_t i) {
     itoa(text, i);
     return std::to_string(i) == text;
 }
-
-
 
 int main() {
     char text[32];
