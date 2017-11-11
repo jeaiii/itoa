@@ -21,12 +21,12 @@ void xu32toa_jeaiii(uint32_t i, char *b)
     i < 100 ?
         i < 10 ? Z(i) : A(1) :
         i < 1000000 ?
-        i < 10000 ?
-        i < 1000 ? A(2) : A(3) :
-        i < 100000 ? A(4) : B(5) :
-        i < 100000000 ?
-        i < 10000000 ? B(6) : B(7) :
-        i < 1000000000 ? B(8) : digits<9>(b, ((1ULL << (32 + 29)) / uint32_t(1e9) * i + (1ULL << 31)) >> 29);
+            i < 10000 ?
+                i < 1000 ? A(2) : A(3) :
+                i < 100000 ? A(4) : B(5) :
+            i < 100000000 ?
+                i < 10000000 ? B(6) : B(7) :
+                i < 1000000000 ? B(8) : digits<9>(b, ((1ULL << (32 + 29)) / uint32_t(1e9) * i + (1ULL << 31)) >> 29);
 }
 
 #define TX *b++ = char(t >> 32) + '0', t = 10ULL * uint32_t(t)
@@ -49,12 +49,12 @@ void u32toa_jeaiii(uint32_t i, char *b)
     i < 100 ?
         i < 10 ? T0(i) : T(1, 0) :
         i < 1000000 ?
-        i < 10000 ?
-        i < 1000 ? T(2, 0) : T(3, 0) :
-        i < 100000 ? T(4, 0) : T(5, 15) :
-        i < 100000000 ?
-        i < 10000000 ? T(6, 18) : T(7, 21) :
-        i < 1000000000 ? T(8, 24) : (t = (1LL << (32 + 29)) / uint32_t(1e9) + 0, t *= i, t += 1ULL << 31, t >>= 29, T9);
+            i < 10000 ?
+                i < 1000 ? T(2, 0) : T(3, 0) :
+                i < 100000 ? T(4, 0) : T(5, 15) :
+            i < 100000000 ?
+                i < 10000000 ? T(6, 18) : T(7, 21) :
+                i < 1000000000 ? T(8, 24) : (t = (1LL << (32 + 29)) / uint32_t(1e9) + 0, t *= i, t += 1ULL << 31, t >>= 29, T9);
 }
 
 void i32toa_jeaiii(int32_t i, char* b)
@@ -63,7 +63,6 @@ void i32toa_jeaiii(int32_t i, char* b)
         *b++ = '-', i = -i;
     u32toa_jeaiii(uint32_t(i), b);
 }
-
 
 void u64toa_jeaiii(uint64_t n, char* b)
 {
@@ -95,4 +94,3 @@ void i64toa_jeaiii(int64_t i, char* b)
         *b++ = '-', i = -i;
     u64toa_jeaiii(uint64_t(i), b);
 }
-
