@@ -27,12 +27,14 @@ char* itoa(char *b, uint32_t i)
             D(4,0)
         D(5, 15)
     }
+
     if (i < 100000000)
     {
         if (i < 10000000)
             D(6, 18)
         D(7, 21)
     }
+
     if (i < 1000000000)
         D(8, 24)
 
@@ -55,19 +57,22 @@ i0: b[ 0] = i + '0';
     return b+1;
 }
 
-char* itoa(char* b, int32_t i) {
+char* itoa(char* b, int32_t i)
+{
     if (i < 0) 
         *b++ = '-', i=-i;
     return itoa(b, uint32_t(i));
 }
 
-bool same(uint32_t i) {
+bool same(uint32_t i)
+{
     char text[32];
     itoa(text, i);
     return std::to_string(i) == text;
 }
 
-int main() {
+void main()
+{
     char text[32];
 
     uint64_t i = 0;
@@ -78,6 +83,7 @@ int main() {
         i += 1;
     } while (i < 1LL<<32);
 
+    itoa(text, 0); std::cout << text << "\n";
     itoa(text, 1); std::cout << text << "\n";
     itoa(text, 9); std::cout << text << "\n";
     itoa(text, 10); std::cout << text << "\n";
