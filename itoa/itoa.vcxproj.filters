@@ -15,7 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="itoa.cpp">
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="itoa_jeaiii.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
