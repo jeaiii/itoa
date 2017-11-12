@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2017 jeaiii
+Copyright (c) 2017 James Edward Anhalt III (jeaiii)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
