@@ -129,7 +129,7 @@ void main()
         uint32_t n = uint32_t(i);
         same(n);
         i += 1;
-    } while (i < 1LL << 32);
+    } while (i < 1ULL << 32);
 
     itoa(text, 0); std::cout << text << "\n";
     itoa(text, 1); std::cout << text << "\n";
