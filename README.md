@@ -3,6 +3,7 @@
 - fast
 - small
 
+```
 https://github.com/jeaiii/itoa-benchmark
 https://github.com/miloyip/itoa-benchmark
 sample results: win64 core i7 2.8Gz
@@ -14,9 +15,12 @@ Benchmarking sequential branchlut2           ... [   3.411ns,   15.993ns]
 Benchmarking     random branchlut2           ...   19.314ns
 Benchmarking sequential countlut             ... [   4.776ns,   14.295ns]
 Benchmarking     random countlut             ...   19.003ns
+
 Benchmarking sequential jeaiii               ... [   3.071ns,    7.850ns]
 Benchmarking     random jeaiii               ...   14.538ns
+
 Benchmarking sequential sse2                 ... [   5.292ns,   10.716ns]
 Benchmarking     random sse2                 ...   17.640ns
 Benchmarking sequential unrolledlut          ... [   6.141ns,    8.739ns]
 Benchmarking     random unrolledlut          ...   15.245ns
+```
