@@ -121,7 +121,7 @@ void u64toa_jeaiii(uint64_t n, char* b)
     LZ(7);
 }
 
-void i64toa_jeaiii_itoa(int64_t i, char* b)
+void i64toa_jeaiii(int64_t i, char* b)
 {
     uint64_t n = i < 0 ? *b++ = '-', 0 - uint64_t(i) : i;
     return u64toa_jeaiii(n, b);
