@@ -27,74 +27,11 @@ SOFTWARE.
 #include <iostream>
 #include <string>
 
-#define D(N,B) { b += N; t = (1LL << (32 + B)) / uint32_t(1e##N) + 1; t *= i; (B) && (t += 1LL << (B)); i = uint32_t(t >> (32 + B)); n = uint32_t(t >> (B)); goto i##N; }
+void i32toa_jeaiii(int32_t i, char* b);
+void u32toa_jeaiii(uint32_t i, char* b);
 
-char* itoa_old(char *b, uint32_t i)
-{
-    uint32_t n;
-    uint64_t t;
-
-    if (i < 100) {
-        if (i < 10) goto i0;
-        D(1, 0)
-    }
-
-    if (i < 1000000)
-    {
-        if (i < 10000)
-        {
-            if (i < 1000)
-                D(2, 0)
-            D(3, 0)
-        }
-        if (i < 100000)
-            D(4, 0)
-        D(5, 15)
-    }
-
-    if (i < 100000000)
-    {
-        if (i < 10000000)
-            D(6, 18)
-        D(7, 21)
-    }
-
-    if (i < 1000000000)
-        D(8, 24)
-
-    {
-        b += 9; t = (1LL << (32 + 29)) / uint32_t(1e9) + 0; t *= i; t += 1LL << (31); i = uint32_t(t >> (32 + 29)); n = uint32_t(t >> (29));
-    }
-
-#define T { t = 10; t *= n; i = uint32_t(t >> 32); n = uint32_t(t); }
-
-     b[-9] = i + '0'; T
-i8 : b[-8] = i + '0'; T
-i7 : b[-7] = i + '0'; T
-i6 : b[-6] = i + '0'; T
-i5 : b[-5] = i + '0'; T
-i4 : b[-4] = i + '0'; T
-i3 : b[-3] = i + '0'; T
-i2 : b[-2] = i + '0'; T
-i1 : b[-1] = i + '0'; T
-i0 : b[0] = i + '0';
-     b[1] = 0;
-
-    return b + 1;
-}
-
-char* itoa_old(char* b, int32_t i)
-{
-    if (i < 0)
-        *b++ = '-', i = -i;
-    return itoa_old(b, uint32_t(i));
-}
-
-extern void i32toa_jeaiii(int32_t i, char* b);
-extern void u32toa_jeaiii(uint32_t i, char* b);
-
-void itoa(char* b, int32_t i) { return i32toa_jeaiii(i, b); }
-void itoa(char* b, uint32_t i) { return u32toa_jeaiii(i, b); }
+void itoa(char* b, int32_t i) { i32toa_jeaiii(i, b); }
+void itoa(char* b, uint32_t i) { u32toa_jeaiii(i, b); }
 
 bool same(uint32_t i)
 {
@@ -104,16 +41,18 @@ bool same(uint32_t i)
     char b[32], *c=b+32;
 
     *--c = 0;
+    uint32_t n = i;
     do {
         *--c = i % 10 + '0';
     } while (i /= 10);
+    i = n;
 
     if (strcmp(a, c)) {
 #else
     std::string c = std::to_string(i);
     if (a != c) {
 #endif
-        std::cout << "FAILURE: " << a << "!=" << i << '\n';
+        std::cout << "FAILURE: " << a << " != " << i << " : " << c << "\n";
         __debugbreak();
         return false;
     }
