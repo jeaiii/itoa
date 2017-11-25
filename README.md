@@ -1,7 +1,7 @@
 # itoa - integer to ascii conversion
 - 32 and 64 bit signed and unsigned versions
-- fast
-- small
+- fast - fasted tested on vs2017 in x86 and x64 for all digit lengths using https://github.com/miloyip/itoa-benchmark
+- small - simple code that produces good code even in debug builds
 
 ```
 https://github.com/jeaiii/itoa-benchmark
