@@ -24,3 +24,4 @@ Benchmarking     random sse2                 ...   17.640ns
 Benchmarking sequential unrolledlut          ... [   6.141ns,    8.739ns]
 Benchmarking     random unrolledlut          ...   15.245ns
 ```
+![u32toa_chart](https://user-images.githubusercontent.com/30875055/33234449-f52c4d22-d1db-11e7-8725-bd3439601608.png)
