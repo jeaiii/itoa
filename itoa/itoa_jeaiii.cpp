@@ -30,7 +30,7 @@ SOFTWARE.
 // use as much precision as possible when needed (log10(u) >= 5) 
 // so shift up then down afterwards by log10(u) * log2(10) ~= 53/16
 // need to round up before and or after in some cases
-// once we have the fixed point number we can read off the digit in the uppper 32 bits
+// once we have the fixed point number we can read off the digit in the upper 32 bits
 // and multiply the lower 32 bits by 10 to get the next digit and so on
 // we can do 2 digits at a time by multiplying by 100 each time
 
