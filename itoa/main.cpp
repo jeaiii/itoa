@@ -27,11 +27,13 @@ SOFTWARE.
 #include <iostream>
 #include <string>
 
-void i32toa_jeaiii(int32_t i, char* b);
-void u32toa_jeaiii(uint32_t i, char* b);
+char* u32toa_jeaiii(uint32_t u, char* b);
+char* i32toa_jeaiii(int32_t i, char* b);
+char* u64toa_jeaiii(uint64_t n, char* b);
 
-void itoa(char* b, int32_t i) { i32toa_jeaiii(i, b); }
 void itoa(char* b, uint32_t i) { u32toa_jeaiii(i, b); }
+void itoa(char* b, int32_t i) { i32toa_jeaiii(i, b); }
+void itoa(char* b, uint64_t i) { u64toa_jeaiii(i, b); }
 
 bool check(const char* b, uint32_t n) {
     uint32_t u = 0;
@@ -57,39 +59,47 @@ void show(T n) {
 
 int main()
 {
+#if 1
     uint64_t i = 0;
     do {
         uint32_t n = uint32_t(i);
         same(n);
         i += 1;
     } while (i < 1ULL << 32);
+#endif
 
-    show(0);
-    show(1);
-    show(9);
-    show(10);
-    show(99);
-    show(100);
-    show(999);
-    show(1000);
-    show(9999);
-    show(10000);
-    show(99999);
-    show(100000);
-    show(999999);
-    show(1000000);
-    show(9999999);
-    show(10000000);
-    show(99999999);
-    show(100000000);
-    show(123456789);
-    show(999999999);
-    show(1000000000);
-    show(4294967295U);
+    for (int b : { 2, 10 })
+        for (uint32_t u = 1, p = u; u >= p; p = u, u *= b) {
+            show(u - 1), same(u - 1);
+            show(u), same(u);
+            show(u + 1), same(u + 1);
+        }
+
+    uint32_t tests[] = {
+        4294967294,
+        4294967295,
+    };
+
+    for (auto u : tests)
+        show(u), same(u);
+
     show(-1);
     show(1 << 31);
     show(0x7fffffff);
     show(-0x7fffffff - 1);
+
+
+    show(99900000000ULL);
+    show(99900000001ULL);
+    show(99900000009ULL);
+
+    show(99901000000ULL);
+    show(99901000001ULL);
+    show(99901000009ULL);
+
+    show(99909000000ULL);
+    show(99909000001ULL);
+    show(99909000009ULL);
 
     return 0;
 }
