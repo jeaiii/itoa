@@ -24,8 +24,6 @@ SOFTWARE.
 
 #include <stdint.h>
 
-#define RETURN char*
-
 // form a 4.32 fixed point number: t = u * 2^32 / 10^log10(u)
 // use as much precision as possible when needed (log10(u) >= 5) 
 // so shift up then down afterwards by log10(u) * log2(10) ~= 53/16
@@ -43,7 +41,6 @@ SOFTWARE.
 
 #if 0
 // 1 char at a time
-
 
 #define W(N, I) b[N] = char(I) + '0'
 #define A(N) t = (uint64_t(1) << (32 + N / 5 * N * 53 / 16)) / uint32_t(1e##N) + 1 - N / 9, t *= u, t >>= N / 5 * N * 53 / 16, t += N / 5 * 4, W(0, t >> 32)
@@ -86,23 +83,26 @@ static const pair s_pairs[] = { P('0'), P('1'), P('2'), P('3'), P('4'), P('5'), 
 #endif
 
 #define LN(N) (L##N, b += N + 1)
-#define LZ(N) (RETURN)&(L##N, b[N + 1] = '\0')
+#define LZ LN
+// if you want to '\0' terminate
+//#define LZ(N) &(L##N, b[N + 1] = '\0')
+
 #define LG(F) (u<100 ? u<10 ? F(0) : F(1) : u<1000000 ? u<10000 ? u<1000 ? F(2) : F(3) : u<100000 ? F(4) : F(5) : u<100000000 ? u<10000000 ? F(6) : F(7) : u<1000000000 ? F(8) : F(9))
 
-RETURN u32toa_jeaiii(uint32_t u, char* b)
+char* u32toa_jeaiii(uint32_t u, char* b)
 {
     uint64_t t;
     return LG(LZ);
 }
 
-RETURN i32toa_jeaiii(int32_t i, char* b)
+char* i32toa_jeaiii(int32_t i, char* b)
 {
     uint32_t u = i < 0 ? *b++ = '-', 0 - uint32_t(i) : i;
     uint64_t t;
     return LG(LZ);
 }
 
-RETURN u64toa_jeaiii(uint64_t n, char* b)
+char* u64toa_jeaiii(uint64_t n, char* b)
 {
     uint32_t u;
     uint64_t t;
@@ -129,7 +129,7 @@ RETURN u64toa_jeaiii(uint64_t n, char* b)
     return LZ(7);
 }
 
-RETURN i64toa_jeaiii(int64_t i, char* b)
+char* i64toa_jeaiii(int64_t i, char* b)
 {
     uint64_t n = i < 0 ? *b++ = '-', 0 - uint64_t(i) : i;
     return u64toa_jeaiii(n, b);

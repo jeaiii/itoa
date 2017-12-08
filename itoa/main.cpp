@@ -31,9 +31,9 @@ char* u32toa_jeaiii(uint32_t u, char* b);
 char* i32toa_jeaiii(int32_t i, char* b);
 char* u64toa_jeaiii(uint64_t n, char* b);
 
-void itoa(char* b, uint32_t i) { u32toa_jeaiii(i, b); }
-void itoa(char* b, int32_t i) { i32toa_jeaiii(i, b); }
-void itoa(char* b, uint64_t i) { u64toa_jeaiii(i, b); }
+void itoa(char* b, uint32_t i) { *u32toa_jeaiii(i, b) = '\0'; }
+void itoa(char* b, int32_t i) { *i32toa_jeaiii(i, b) = '\0'; }
+void itoa(char* b, uint64_t i) { *u64toa_jeaiii(i, b) = '\0'; }
 
 bool check(const char* b, uint32_t n) {
     uint32_t u = 0;
@@ -87,7 +87,6 @@ int main()
     show(1 << 31);
     show(0x7fffffff);
     show(-0x7fffffff - 1);
-
 
     show(99900000000ULL);
     show(99900000001ULL);
