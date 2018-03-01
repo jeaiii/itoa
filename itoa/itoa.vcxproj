@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="itoa_jeaiii.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="to_chars.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

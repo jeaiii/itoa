@@ -21,5 +21,8 @@
     <ClCompile Include="itoa_jeaiii.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="to_chars.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
