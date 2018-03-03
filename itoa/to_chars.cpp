@@ -48,6 +48,7 @@ static const pair s_pairs[] = { P('0'), P('1'), P('2'), P('3'), P('4'), P('5'), 
 #define L29(F) u < 1000000    ? L25(F) : L69(F)
 #define L25(F) u < 10000      ? L23(F) : L45(F)
 #define L69(F) u < 100000000  ? L67(F) : L89(F)
+#define L03(F) u < 100        ? L01(F) : L23(F)
 
 #define L01(F) u < 10         ? F(0) : F(1)
 #define L23(F) u < 1000       ? F(2) : F(3)
@@ -55,54 +56,62 @@ static const pair s_pairs[] = { P('0'), P('1'), P('2'), P('3'), P('4'), P('5'), 
 #define L67(F) u < 10000000   ? F(6) : F(7)
 #define L89(F) u < 1000000000 ? F(8) : F(9)
 
-
 #define POS(N) (N < length ? C##N, N + 1 : N + 1)
 #define NEG(N) (N + 1 < length ? *b++ = '-', C##N, N + 2 : N + 2)
 
-size_t u32to_chars_jeaiii(char* b, size_t length, uint32_t u)
+size_t to_chars_jeaiii(char* b, size_t length, uint32_t u)
 {
     uint64_t t;
     return L09(POS);
 }
 
-size_t i32to_chars_jeaiii(char* b, int length, int32_t i)
+size_t to_chars_jeaiii(char* b, size_t length, int32_t i)
 {
     uint64_t t;
     uint32_t u = i;
     return i < 0 ? u = 0 - u, L09(NEG) : L09(POS);
 }
 
-#if 0
-char* u64to_chars_jeaiii(uint64_t n, char* b)
+size_t to_chars_jeaiii(char* b, size_t length, uint64_t n)
 {
+    size_t count;
     uint32_t u;
     uint64_t t;
 
     if (uint32_t(n >> 32) == 0)
-        return u = uint32_t(n), LOG;
+        return u = uint32_t(n), L09(POS);
 
     uint64_t a = n / 100000000;
 
     if (uint32_t(a >> 32) == 0)
     {
         u = uint32_t(a);
-        b += LOG;
+        b += count = L09(POS);
+        count += 8;
+        if (count > length)
+            return count;
     }
     else
     {
         u = uint32_t(a / 100000000);
-        LOG;
+        b += count = L03(POS);
+        count += 16;
+        if (count > length)
+            return count;
+
         u = a % 100000000;
-        LN(7);
+        C7;
+        b += 8;
     }
 
     u = n % 100000000;
-    return LN(7);
+    C7;
+    return count;
 }
 
-char* i64to_chars_jeaiii(int64_t i, char* b)
+size_t to_chars_jeaiii(char* b, size_t length, int64_t i)
 {
-    uint64_t n = i < 0 ? *b++ = '-', 0 - uint64_t(i) : i;
-    return u64to_chars_jeaiii(n, b);
+    return i < 0
+        ? to_chars_jeaiii(b + 1, length > 0 ? b[0] = '-', length - 1 : 0, uint64_t(0) - uint64_t(i)) + 1
+        : to_chars_jeaiii(b, length, uint64_t(i));
 }
-#endif

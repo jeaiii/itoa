@@ -27,22 +27,27 @@ SOFTWARE.
 #include <iostream>
 #include <string>
 
-char* u32toa_jeaiii(uint32_t u, char* b);
-char* i32toa_jeaiii(int32_t i, char* b);
+char* u32toa_jeaiii(uint32_t n, char* b);
+char* i32toa_jeaiii(int32_t n, char* b);
 char* u64toa_jeaiii(uint64_t n, char* b);
+char* i64toa_jeaiii(int64_t n, char* b);
 
-size_t u32to_chars_jeaiii(char* b, size_t count, uint32_t u);
-size_t i32to_chars_jeaiii(char* b, int count, int32_t u);
+size_t to_chars_jeaiii(char* b, size_t count, uint32_t n);
+size_t to_chars_jeaiii(char* b, size_t count, int32_t n);
+size_t to_chars_jeaiii(char* b, size_t count, uint64_t n);
+size_t to_chars_jeaiii(char* b, size_t count, int64_t n);
 
-//void itoa(char* b, uint32_t n) { *u32toa_jeaiii(n, b) = '\0'; }
-//void itoa(char* b, int32_t n) { *i32toa_jeaiii(n, b) = '\0'; }
-
-void itoa(char* b, uint32_t n) { b[u32to_chars_jeaiii(b, 10, n)] = '\0'; }
-void itoa(char* b, int32_t n) { b[i32to_chars_jeaiii(b, 11, n)] = '\0'; }
-
-
-
-void itoa(char* b, uint64_t i) { *u64toa_jeaiii(i, b) = '\0'; }
+#if 0
+void itoa(uint32_t n, char* b) { *u32toa_jeaiii(n, b) = '\0'; }
+void itoa(int32_t n, char* b) { *i32toa_jeaiii(n, b) = '\0'; }
+void itoa(uint64_t n, char* b) { *u64toa_jeaiii(n, b) = '\0'; }
+void itoa(int64_t n, char* b) { *i64toa_jeaiii(n, b) = '\0'; }
+#else
+void itoa(uint32_t n, char* b) { b[to_chars_jeaiii(b, 10, n)] = '\0'; }
+void itoa(int32_t n, char* b) { b[to_chars_jeaiii(b, 11, n)] = '\0'; }
+void itoa(uint64_t n, char* b) { b[to_chars_jeaiii(b, 20, n)] = '\0'; }
+void itoa(int64_t n, char* b) { b[to_chars_jeaiii(b, 20, n)] = '\0'; }
+#endif
 
 bool check(const char* b, uint32_t n) {
     uint32_t u = 0;
@@ -53,7 +58,7 @@ bool check(const char* b, uint32_t n) {
 void same(uint32_t n)
 {
     char text[32];
-    itoa(text, n);
+    itoa(n, text);
     if (!check(text, n)) {
         std::cout << "FAILURE: " << text << " != " << n << "\n";
     }
@@ -62,7 +67,7 @@ void same(uint32_t n)
 template <typename T>
 void show(T n) {
     char text[32];
-    itoa(text, n);
+    itoa(n, text);
     std::cout << text << "\n";
 }
 
@@ -108,6 +113,14 @@ int main()
     show(99909000000ULL);
     show(99909000001ULL);
     show(99909000009ULL);
+
+    show(99909000009LL);
+    show(-99909000009LL);
+
+    show(17999999999999999999ULL);
+
+    show(5999999999999999999LL);
+    show(-5999999999999999999LL);
 
     return 0;
 }
