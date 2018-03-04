@@ -3,7 +3,7 @@
 - fast - fasted tested on vs2017 in x86 and x64 for all digit lengths using https://github.com/miloyip/itoa-benchmark
 - small - simple code that produces good compiled code even in debug builds
 
-![u32toa_chart](https://user-images.githubusercontent.com/30875055/33234449-f52c4d22-d1db-11e7-8725-bd3439601608.png)
+![u32toa_chart](https://github.com/jeaiii/itoa/blob/master/chart.png)
 
 ```
 https://github.com/jeaiii/itoa-benchmark
