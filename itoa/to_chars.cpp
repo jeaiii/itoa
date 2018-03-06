@@ -75,15 +75,15 @@ size_t to_chars_jeaiii(char* b, size_t length, int32_t i)
 size_t to_chars_jeaiii(char* b, size_t length, uint64_t n)
 {
     size_t count;
-    uint32_t u;
+    uint32_t u = uint32_t(n);
     uint64_t t;
 
-    if (uint32_t(n >> 32) == 0)
-        return u = uint32_t(n), L09(POS);
+    if (u == n)
+        return L09(POS);
 
     uint64_t a = n / 100000000;
 
-    if (uint32_t(a >> 32) == 0)
+    if (uint32_t(a) == a)
     {
         u = uint32_t(a);
         b += count = L09(POS);
