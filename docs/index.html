@@ -15,7 +15,7 @@
 
 <script type="text/javascript" src="data.json"></script>
 <script type="text/javascript">
-Highcharts.chart('container0', {
+var chart0 = Highcharts.chart('container0', {
     title: {
         text: tests[0].name
     },
@@ -79,10 +79,7 @@ Highcharts.chart('container0', {
         }]
     }
 });
-</script>
-	
-<script type="text/javascript">
-Highcharts.chart('container2', {
+var chart2=Highcharts.chart('container2', {
     title: {
         text: tests[2].name
     },
