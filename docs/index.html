@@ -10,48 +10,22 @@
 </head>
 <body>
 
-<div id="container0" style="width: 1024px; height: 768px; margin: 0 auto"></div>
+<div id="chart0" style="width: 1024px; height: 768px; margin: 0 auto"></div>
 
-<div id="container2" style="width: 1024px; height: 768px; margin: 0 auto"></div>
+<div id="chart2" style="width: 1024px; height: 768px; margin: 0 auto"></div>
 
 <script type="text/javascript" src="data.json"></script>
 <script type="text/javascript">
-var chart0 = Highcharts.chart('container0', {
-	
-    exporting: {
-        chartOptions: { // specific options for the exported image
-            plotOptions: {
-                series: {
-                    dataLabels: {
-                        enabled: true
-                    }
-                }
-            }
-        },
-        fallbackToExportServer: false
-    },	
-	
+Highcharts.chart('chart0', {
     title: {
         text: tests[0].name
     },
     subtitle: {
         text: 'vs2017 x86_64 release'
     },
-    exporting: {
-	enabled:true,
-        chartOptions: { // specific options for the exported image
-            plotOptions: {
-                series: {
-                    dataLabels: {
-                        enabled: true
-                    }
-                }
-            }
-        },
-        fallbackToExportServer: false
-    },
     xAxis: {
-	tickInterval: 1,
+	    	categories: ['random'],
+				tickInterval: 1,
         title: {
             text: 'digits'
         }
@@ -68,54 +42,19 @@ var chart0 = Highcharts.chart('container0', {
         align: 'right',
         verticalAlign: 'middle'
     },
-    plotOptions: {
-        series: {
-	    //step: 'center',
-            label: {
-                //connectorAllowed: false,
-		//onArea: true
-            },
-            pointStart: 0
-        }
-    },
-    series: tests[0].data,
-    responsive: {
-        rules: [{
-            //condition: {
-            //    maxWidth: 500
-            //},
-            chartOptions: {
-                legend: {
-                    //layout: 'horizontal',
-                    //align: 'center',
-                    //verticalAlign: 'bottom'
-                }
-            }
-        }]
-    }
+    series: tests[0].data
+
 });
-var chart2=Highcharts.chart('container2', {
+Highcharts.chart('chart2', {
     title: {
         text: tests[2].name
     },
     subtitle: {
         text: 'vs2017 x86_64 release'
     },
-    exporting: {
-	enabled:true,
-        chartOptions: { // specific options for the exported image
-            plotOptions: {
-                series: {
-                    dataLabels: {
-                        enabled: true
-                    }
-                }
-            }
-        },
-        fallbackToExportServer: false
-    },
     xAxis: {
-	tickInterval: 1,
+	    	categories: ['random'],
+				tickInterval: 1,
         title: {
             text: 'digits'
         }
@@ -125,39 +64,16 @@ var chart2=Highcharts.chart('container2', {
             text: 'cycle count - log'
         },
 	type: 'logarithmic',
-        minorTickInterval: 0.1
+        minorTickInterval: .1
     },
     legend: {
         layout: 'vertical',
         align: 'right',
         verticalAlign: 'middle'
     },
-    plotOptions: {
-        series: {
-	    //step: 'center',
-            label: {
-                //connectorAllowed: false,
-		//onArea: true
-            },
-            pointStart: 0
-        }
-    },
-    series: tests[2].data,
-    responsive: {
-        rules: [{
-            //condition: {
-            //    maxWidth: 500
-            //},
-            chartOptions: {
-                legend: {
-                    //layout: 'horizontal',
-                    //align: 'center',
-                    //verticalAlign: 'bottom'
-                }
-            }
-        }]
-    }
-});	
+    series: tests[2].data
+
+});
 </script>
 </body>
 </html>
