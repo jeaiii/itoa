@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>itoa benchmark</title>
+<script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/modules/series-label.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/modules/offline-exporting.js"></script>
+</head>
+<body>
+
+<div id="container" style="min-width: 512px; min-height: 768px; margin: 0 auto"></div>
+
+<script type="text/javascript" src="unknown_win64_vc2013.json"></script>
+<script type="text/javascript">
+var test = tests[0];
+Highcharts.chart('container', {
+    title: {
+        text: test.name
+    },
+    subtitle: {
+        text: 'jeaiii'
+    },
+    exporting: {
+	enabled:true,
+        chartOptions: { // specific options for the exported image
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            }
+        },
+        fallbackToExportServer: false
+    },
+    xAxis: {
+	tickInterval: 1,
+        title: {
+            text: 'digits'
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'cycle count - log'
+        },
+	type: 'logarithmic',
+        minorTickInterval: 0.1
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+    plotOptions: {
+        series: {
+	    //step: 'center',
+            label: {
+                //connectorAllowed: false,
+		//onArea: true
+            },
+            pointStart: 0
+        }
+    },
+    series: test.data,
+    responsive: {
+        rules: [{
+            //condition: {
+            //    maxWidth: 500
+            //},
+            chartOptions: {
+                legend: {
+                    //layout: 'horizontal',
+                    //align: 'center',
+                    //verticalAlign: 'bottom'
+                }
+            }
+        }]
+    }
+});
+</script>
+</body>
+</html>
