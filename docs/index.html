@@ -11,16 +11,16 @@
 <body>
 
 <div id="container" style="min-width: 512px; min-height: 768px; margin: 0 auto"></div>
+<div id="container2" style="min-width: 512px; min-height: 768px; margin: 0 auto"></div>
 
 <script type="text/javascript" src="data.json"></script>
 <script type="text/javascript">
-var test = tests[2];
 Highcharts.chart('container', {
     title: {
-        text: test.name
+        text: tests[0].name
     },
     subtitle: {
-        text: 'jeaiii'
+        text: 'vs2017'
     },
     exporting: {
 	enabled:true,
@@ -63,7 +63,7 @@ Highcharts.chart('container', {
             pointStart: 0
         }
     },
-    series: test.data,
+    series: tests[0].data,
     responsive: {
         rules: [{
             //condition: {
@@ -79,6 +79,71 @@ Highcharts.chart('container', {
         }]
     }
 });
+	
+Highcharts.chart('container2', {
+    title: {
+        text: tests[2].name
+    },
+    subtitle: {
+        text: 'vs2017'
+    },
+    exporting: {
+	enabled:true,
+        chartOptions: { // specific options for the exported image
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            }
+        },
+        fallbackToExportServer: false
+    },
+    xAxis: {
+	tickInterval: 1,
+        title: {
+            text: 'digits'
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'cycle count - log'
+        },
+	type: 'logarithmic',
+        minorTickInterval: 0.1
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+    plotOptions: {
+        series: {
+	    //step: 'center',
+            label: {
+                //connectorAllowed: false,
+		//onArea: true
+            },
+            pointStart: 0
+        }
+    },
+    series: tests[2].data,
+    responsive: {
+        rules: [{
+            //condition: {
+            //    maxWidth: 500
+            //},
+            chartOptions: {
+                legend: {
+                    //layout: 'horizontal',
+                    //align: 'center',
+                    //verticalAlign: 'bottom'
+                }
+            }
+        }]
+    }
+});	
 </script>
 </body>
 </html>
