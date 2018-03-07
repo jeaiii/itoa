@@ -17,11 +17,25 @@
 <script type="text/javascript" src="data.json"></script>
 <script type="text/javascript">
 var chart0 = Highcharts.chart('container0', {
+	
+    exporting: {
+        chartOptions: { // specific options for the exported image
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            }
+        },
+        fallbackToExportServer: false
+    },	
+	
     title: {
         text: tests[0].name
     },
     subtitle: {
-        text: 'vs2017'
+        text: 'vs2017 x86_64 release'
     },
     exporting: {
 	enabled:true,
@@ -85,7 +99,7 @@ var chart2=Highcharts.chart('container2', {
         text: tests[2].name
     },
     subtitle: {
-        text: 'vs2017'
+        text: 'vs2017 x86_64 release'
     },
     exporting: {
 	enabled:true,
