@@ -10,70 +10,35 @@
 </head>
 <body>
 
-<div id="chart0" style="width: 1024px; height: 768px; margin: 0 auto"></div>
-
-<div id="chart2" style="width: 1024px; height: 768px; margin: 0 auto"></div>
+<center><select id="select_chart" onchange="do_chart(tests[this.value])"></select></center>
+<div id="chart" style="width: 1024px; height: 768px; margin: 0 auto"></div>
 
 <script type="text/javascript" src="data.json"></script>
 <script type="text/javascript">
-Highcharts.chart('chart0', {
-    title: {
-        text: tests[0].name
-    },
-    subtitle: {
-        text: 'vs2017 x86_64 release'
-    },
-    xAxis: {
-	    	categories: ['random'],
-				tickInterval: 1,
-        title: {
-            text: 'digits'
-        }
-    },
-    yAxis: {
-        title: {
-            text: 'cycle count - log'
-        },
-	type: 'logarithmic',
-        minorTickInterval: 0.1
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
-    },
-    series: tests[0].data
 
-});
-Highcharts.chart('chart2', {
-    title: {
-        text: tests[2].name
-    },
-    subtitle: {
-        text: 'vs2017 x86_64 release'
-    },
-    xAxis: {
-	    	categories: ['random'],
-				tickInterval: 1,
-        title: {
-            text: 'digits'
+function do_chart(test) {
+    Highcharts.chart('chart',
+        {
+            series: test.data,
+            title: { text: test.name },
+            subtitle: { text: 'vs2017 x86_64 release' },
+            xAxis: { title: { text: 'digits' }, categories: ['?'], tickInterval: 1 },
+            yAxis: { title: { text: 'cycle count - log' }, type: 'logarithmic', minorTickInterval: 0.1 },
+            legend: { layout: 'vertical', align: 'right', verticalAlign: 'middle' }
         }
-    },
-    yAxis: {
-        title: {
-            text: 'cycle count - log'
-        },
-	type: 'logarithmic',
-        minorTickInterval: .1
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
-    },
-    series: tests[2].data
+    );
+}
 
-});
+select = document.getElementById('select_chart');
+for (var i = 0; i<tests.length; ++i) {
+    var opt = document.createElement('option');
+    opt.value = i;
+    opt.text = tests[i].name;
+    select.appendChild(opt);
+}
+
+
+do_chart(tests[0]);
 </script>
 </body>
 </html>
