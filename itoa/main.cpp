@@ -42,11 +42,16 @@ void itoa(uint32_t n, char* b) { *u32toa_jeaiii(n, b) = '\0'; }
 void itoa(int32_t n, char* b) { *i32toa_jeaiii(n, b) = '\0'; }
 void itoa(uint64_t n, char* b) { *u64toa_jeaiii(n, b) = '\0'; }
 void itoa(int64_t n, char* b) { *i64toa_jeaiii(n, b) = '\0'; }
-#else
+#elif 0
 void itoa(uint32_t n, char* b) { b[to_chars_jeaiii(b, 10, n)] = '\0'; }
 void itoa(int32_t n, char* b) { b[to_chars_jeaiii(b, 11, n)] = '\0'; }
 void itoa(uint64_t n, char* b) { b[to_chars_jeaiii(b, 20, n)] = '\0'; }
 void itoa(int64_t n, char* b) { b[to_chars_jeaiii(b, 20, n)] = '\0'; }
+#else
+#include "int_to_chars_jeaiii.h"
+
+#define itoa int_to_chars_jeaiii<void>
+
 #endif
 
 bool check(const char* b, uint32_t n) {

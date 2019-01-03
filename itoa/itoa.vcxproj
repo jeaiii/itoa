@@ -143,6 +143,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="to_chars.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="int_to_chars_jeaiii.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
