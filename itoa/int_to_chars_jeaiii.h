@@ -1,5 +1,6 @@
 /*
-Copyright (c) 2017 James Edward Anhalt III - https://github.com/jeaiii/itoa/int_to_chars_jeaiii.h
+Copyright (c) 2019 James Edward Anhalt III
+https://github.com/jeaiii/itoa/itoa/int_to_chars_jeaiii.h
 
 Boost Software License - Version 1.0 - August 17th, 2003
 
