@@ -69,7 +69,7 @@ static const pair s_pairs[] = { P('0'), P('1'), P('2'), P('3'), P('4'), P('5'), 
 template<class T> inline T terminate(char* b) { return b; }
 template<> inline void terminate<void>(char* b) { *b = 0; }
 
-template<class RESULT = char*, class T, std::enable_if_t<(sizeof(T) <= sizeof(uint32_t))>* = 0>
+template<class RESULT = char*, class T, std::enable_if_t<(sizeof(T) <= sizeof(uint32_t))>* = nullptr>
 inline RESULT int_to_chars_jeaiii(T i, char* b)
 {
     uint64_t t;
@@ -77,7 +77,7 @@ inline RESULT int_to_chars_jeaiii(T i, char* b)
     return L09(LAST);
 }
 
-template<class RESULT = char*, class T, std::enable_if_t<(sizeof(T) == sizeof(uint64_t))>* = 0>
+template<class RESULT = char*, class T, std::enable_if_t<(sizeof(T) == sizeof(uint64_t))>* = nullptr>
 inline RESULT int_to_chars_jeaiii(T i, char* b)
 {
     uint64_t t;
