@@ -5,4 +5,4 @@
 
 ## **[Click for interactive performance charts](https://jeaiii.github.io/itoa/)**
 
-[![u32toa_chart](https://github.com/jeaiii/itoa/blob/master/chart.png)](https://jeaiii.github.io/itoa/)
+[![u32toa_chart](https://github.com/jeaiii/itoa/blob/main/chart.png)](https://jeaiii.github.io/itoa/)
