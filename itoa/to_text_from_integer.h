@@ -64,7 +64,7 @@ SOFTWARE.
 //
 // the template nature of this code allows the compiler to further optimize based on the type
 // for example 8bit numbers range from 0-255 so it optimizes down to 3 cases making it even faster
-// so if you can tell your compiler 
+// so if you can "tell" your compiler the range it may optimize even better
 
 
 namespace jeaiii
