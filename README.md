@@ -6,8 +6,13 @@
 
 ## **Check it out vs. [{fmt}](https://github.com/fmtlib/fmt) on [godbolt.org](https://godbolt.org/z/jf8GMvz5Y)**
 
-    static constexpr uint64_t murmur64(uint64_t h) {
-
+```
+-----------------------------------------------------------
+Benchmark                 Time             CPU   Iterations
+-----------------------------------------------------------
+BM_jea<uint32_t>       19.2 ns         11.5 ns     65908965
+BM_fmt<uint32_t>       30.6 ns         17.7 ns     38902061
+```
 
 ## **[Click for interactive performance charts](https://jeaiii.github.io/itoa/)**
 
