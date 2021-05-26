@@ -4,7 +4,7 @@
 - small - simple code that produces good compiled code even in debug builds
 - 0 dependancy header version - [to_text_from_integer.h](itoa/to_text_from_integer.h)
 
-## **Check it out vs. [{fmt}](https://github.com/fmtlib/fmt) on [godbolt.org](https://godbolt.org/z/jf8GMvz5Y)**
+## **Check it out vs. [{fmt}](https://github.com/fmtlib/fmt) on [godbolt.org](https://godbolt.org/z/rxcTTEPrv)**
 
 ```
 -----------------------------------------------------------
