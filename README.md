@@ -16,4 +16,6 @@ BM_fmt<uint32_t>       30.6 ns         17.7 ns     38902061
 
 ## **[Click for interactive performance charts](https://jeaiii.github.io/itoa/)**
 
+The last column is uniform random length numbers from 1 to N digits
+
 [![u32toa_chart](https://github.com/jeaiii/itoa/blob/main/chart.png)](https://jeaiii.github.io/itoa/)
