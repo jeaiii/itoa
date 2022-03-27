@@ -40,7 +40,7 @@ SOFTWARE.
 //   0  1  /\    /\    /\    /\
 //        2  3  4  5  6  7  8  9
 //
-// there are other possilities but this is a nice balance and beats out all the count trailing zero methods of computing log10(u)
+// there are other possilities but this is a nice balance and beats out all the count leading zero methods of computing log10(u)
 // WHEN combined with actually converting the number to text (i.e. not tested in isolation without the random branch)
 
 // fully unrolled code is generated to convert numbers for each length with no further branching
