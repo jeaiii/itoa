@@ -47,10 +47,16 @@ void itoa(uint32_t n, char* b) { b[to_chars_jeaiii(b, 10, n)] = '\0'; }
 void itoa(int32_t n, char* b) { b[to_chars_jeaiii(b, 11, n)] = '\0'; }
 void itoa(uint64_t n, char* b) { b[to_chars_jeaiii(b, 20, n)] = '\0'; }
 void itoa(int64_t n, char* b) { b[to_chars_jeaiii(b, 20, n)] = '\0'; }
-#else
+#elif 0
 #include "int_to_chars_jeaiii.h"
 
 #define itoa int_to_chars_jeaiii<void>
+#else
+#include "jeaiii_to_text.h"
+void itoa(uint32_t n, char* b) { *jeaiii::to_text_from_integer(b, n) = '\0'; }
+void itoa(int32_t n, char* b) { *jeaiii::to_text_from_integer(b, n) = '\0'; }
+void itoa(uint64_t n, char* b) { *jeaiii::to_text_from_integer(b, n) = '\0'; }
+void itoa(int64_t n, char* b) { *jeaiii::to_text_from_integer(b, n) = '\0'; }
 
 #endif
 
@@ -78,7 +84,7 @@ void show(T n) {
 
 int main()
 {
-#if 0
+#if 1
     uint64_t i = 0;
     do {
         uint32_t n = uint32_t(i);

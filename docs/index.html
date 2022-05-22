@@ -13,17 +13,21 @@
 <center><select id="select_chart" onchange="do_chart(tests[this.value])"></select></center>
 <div id="chart" style="width: 1024px; height: 768px; margin: 0 auto"></div>
 
-<script type="text/javascript" src="data.json"></script>
+<script type="text/javascript" src="release_win64_vc2019.js"></script>
 <script type="text/javascript">
 
 function do_chart(test) {
+
     Highcharts.chart('chart',
         {
             series: test.data,
             title: { text: test.name },
-            subtitle: { text: 'vs2017 x86_64 release' },
-            xAxis: { title: { text: 'digits' }, categories: 
-            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], showLastLabel: false },
+            subtitle: { text: test.info },
+            xAxis: {
+                title: { text: 'digits' },
+                categories: test.categories,
+                showLastLabel: true
+            },
             yAxis: { title: { text: 'cycle count - log' }, type: 'logarithmic', minorTickInterval: 0.1 },
             legend: { layout: 'vertical', align: 'right', verticalAlign: 'middle' }
         }
