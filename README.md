@@ -1,6 +1,7 @@
 # itoa - Fast integer to ascii / integer to string conversion
+- newest version: [jeaiii_to_text.h](itoa/jeaiii_to_text.h)
 - 32 and 64 bit signed and unsigned versions
-- fast - fasted tested on vs2018 in x86 and x64 for all digit lengths, uniform random bits, and uniform random digit lengths (latest version is even **25%** faster than before) using https://github.com/jeaiii/itoa-benchmark
+- fast - fasted tested on vs2019 in x86 and x64 for all digit lengths, uniform random bits, and uniform random digit lengths (latest version is even **25%** faster than before) using https://github.com/jeaiii/itoa-benchmark
 - small - simple code that produces good compiled code even in debug builds
 - **0 dependancy** header only version specialized for 8, 16, 32, and 64 bit signed and unsigned integers - [jeaiii_to_text.h](itoa/jeaiii_to_text.h)
 - Thanks to [Junekey Jeon](https://github.com/jk-jeon) for the great writeup [here](https://jk-jeon.github.io/posts/2022/02/jeaiii-algorithm/), providing better insight into more rigorous mathematical foundations which eliminated an unneeded addition, and renewing my interest into making an even faster version
