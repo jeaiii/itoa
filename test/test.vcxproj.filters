@@ -20,7 +20,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\itoa\to_text.h">
+    <ClInclude Include="..\include\itoa\jeaiii_to_text.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

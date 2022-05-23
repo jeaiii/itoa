@@ -27,7 +27,7 @@ SOFTWARE.
 #include <iostream>
 #include <string>
 
-#include "../include/itoa/to_text.h"
+#include "../include/itoa/jeaiii_to_text.h"
 void itoa(uint32_t n, char* b) { *jeaiii::to_text_from_integer(b, n) = '\0'; }
 void itoa(int32_t n, char* b) { *jeaiii::to_text_from_integer(b, n) = '\0'; }
 void itoa(uint64_t n, char* b) { *jeaiii::to_text_from_integer(b, n) = '\0'; }
