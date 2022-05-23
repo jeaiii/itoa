@@ -26,7 +26,6 @@ namespace jeaiii
 {
     using u32 = decltype(0xffffffff);
     using u64 = decltype(0xffffffffffffffff);
-    using size_t = decltype(sizeof(0));
 
     struct pair
     {
