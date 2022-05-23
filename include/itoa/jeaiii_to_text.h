@@ -22,6 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#ifndef JEAIII_TO_TEXT_H_
+#define JEAIII_TO_TEXT_H_
+
 namespace jeaiii
 {
     using u32 = decltype(0xffffffff);
@@ -239,4 +242,5 @@ namespace jeaiii
         *reinterpret_cast<pair*>(b + 6) = digits.dd[f6 >> 32];
         return b + 8;
     }
-} 
+}
+#endif // JEAIII_TO_TEXT_H_
