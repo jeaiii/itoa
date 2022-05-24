@@ -127,17 +127,17 @@ namespace jeaiii
                 *reinterpret_cast<pair*>(b + 6) = digits.dd[f6 >> 32];
                 return b + 8;
             }
-            auto f0 = u64(10 * 0x1p57 / 1e9 + 1) * n;
-            *reinterpret_cast<pair*>(b) = digits.fd[f0 >> 57];
+            auto f0 = (u64(10 * 0x1p57 / 1e9 + 1) * n >> 25) + 1;
+            *reinterpret_cast<pair*>(b) = digits.fd[f0 >> 32];
             b -= n < u32(1e9);
-            auto f2 = (f0 & mask<57>) * 100;
-            *reinterpret_cast<pair*>(b + 2) = digits.dd[f2 >> 57];
-            auto f4 = (f2 & mask<57>) * 100;
-            *reinterpret_cast<pair*>(b + 4) = digits.dd[f4 >> 57];
-            auto f6 = (f4 & mask<57>) * 100;
-            *reinterpret_cast<pair*>(b + 6) = digits.dd[f6 >> 57];
-            auto f8 = (f6 & mask<57>) * 100;
-            *reinterpret_cast<pair*>(b + 8) = digits.dd[f8 >> 57];
+            auto f2 = (f0 & mask<32>) * 100;
+            *reinterpret_cast<pair*>(b + 2) = digits.dd[f2 >> 32];
+            auto f4 = (f2 & mask<32>) * 100;
+            *reinterpret_cast<pair*>(b + 4) = digits.dd[f4 >> 32];
+            auto f6 = (f4 & mask<32>) * 100;
+            *reinterpret_cast<pair*>(b + 6) = digits.dd[f6 >> 32];
+            auto f8 = (f6 & mask<32>) * 100;
+            *reinterpret_cast<pair*>(b + 8) = digits.dd[f8 >> 32];
             return b + 10;
         }
 
@@ -187,17 +187,17 @@ namespace jeaiii
         }
         else if (n < u64(0x1p32))
         {
-            auto f0 = u64(10 * 0x1p57 / 1e9 + 1) * n;
-            *reinterpret_cast<pair*>(b) = digits.fd[f0 >> 57];
+            auto f0 = (u64(10 * 0x1p57 / 1e9 + 1) * n >> 25) + 1;
+            *reinterpret_cast<pair*>(b) = digits.fd[f0 >> 32];
             b -= n < u32(1e9);
-            auto f2 = (f0 & mask<57>) * 100;
-            *reinterpret_cast<pair*>(b + 2) = digits.dd[f2 >> 57];
-            auto f4 = (f2 & mask<57>) * 100;
-            *reinterpret_cast<pair*>(b + 4) = digits.dd[f4 >> 57];
-            auto f6 = (f4 & mask<57>) * 100;
-            *reinterpret_cast<pair*>(b + 6) = digits.dd[f6 >> 57];
-            auto f8 = (f6 & mask<57>) * 100;
-            *reinterpret_cast<pair*>(b + 8) = digits.dd[f8 >> 57];
+            auto f2 = (f0 & mask<32>) * 100;
+            *reinterpret_cast<pair*>(b + 2) = digits.dd[f2 >> 32];
+            auto f4 = (f2 & mask<32>) * 100;
+            *reinterpret_cast<pair*>(b + 4) = digits.dd[f4 >> 32];
+            auto f6 = (f4 & mask<32>) * 100;
+            *reinterpret_cast<pair*>(b + 6) = digits.dd[f6 >> 32];
+            auto f8 = (f6 & mask<32>) * 100;
+            *reinterpret_cast<pair*>(b + 8) = digits.dd[f8 >> 32];
             b += 10;
         }
         else
