@@ -28,21 +28,33 @@ SOFTWARE.
 #include <string>
 
 #include "../include/itoa/jeaiii_to_text.h"
-void itoa(uint32_t n, char* b) { *jeaiii::to_text_from_integer(b, n) = '\0'; }
-void itoa(int32_t n, char* b) { *jeaiii::to_text_from_integer(b, n) = '\0'; }
-void itoa(uint64_t n, char* b) { *jeaiii::to_text_from_integer(b, n) = '\0'; }
-void itoa(int64_t n, char* b) { *jeaiii::to_text_from_integer(b, n) = '\0'; }
 
-bool check(const char* b, uint32_t n) {
-    uint32_t u = 0;
+void to_string(char* str, bool n) { *jeaiii::to_text_from_integer(str, n) = '\0'; }
+
+void to_string(char* str, char n) { *jeaiii::to_text_from_integer(str, n) = '\0'; }
+void to_string(char* str, signed char n) { *jeaiii::to_text_from_integer(str, n) = '\0'; }
+void to_string(char* str, unsigned char n) { *jeaiii::to_text_from_integer(str, n) = '\0'; }
+
+void to_string(char* str, int n) { *jeaiii::to_text_from_integer(str, n) = '\0'; }
+void to_string(char* str, short n) { *jeaiii::to_text_from_integer(str, n) = '\0'; }
+void to_string(char* str, long n) { *jeaiii::to_text_from_integer(str, n) = '\0'; }
+void to_string(char* str, long long n) { *jeaiii::to_text_from_integer(str, n) = '\0'; }
+
+void to_string(char* str, unsigned int n) { *jeaiii::to_text_from_integer(str, n) = '\0'; }
+void to_string(char* str, unsigned short n) { *jeaiii::to_text_from_integer(str, n) = '\0'; }
+void to_string(char* str, unsigned long n) { *jeaiii::to_text_from_integer(str, n) = '\0'; }
+void to_string(char* str, unsigned long long n) { *jeaiii::to_text_from_integer(str, n) = '\0'; }
+
+bool check(const char* b, uint64_t n) {
+    uint64_t u = 0;
     for (; *b; ++b) u = u * 10 + (*b - '0');
     return u == n;
 }
 
-void same(uint32_t n)
+void same(uint64_t n)
 {
     char text[32];
-    itoa(n, text);
+    to_string(text, n);
     if (!check(text, n)) {
         std::cout << "FAILURE: " << text << " != " << n << "\n";
     }
@@ -51,13 +63,13 @@ void same(uint32_t n)
 template <typename T>
 void show(T n) {
     char text[32];
-    itoa(n, text);
+    to_string(text, n);
     std::cout << text << "\n";
 }
 
 int main()
 {
-#if 1
+#if 0
     uint64_t i = 0;
     do {
         uint32_t n = uint32_t(i);

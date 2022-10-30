@@ -87,7 +87,8 @@ namespace jeaiii
         constexpr auto q = sizeof(T);
         using U = cond<q == 1, unsigned char, cond<q <= sizeof(short), unsigned short, cond<q <= sizeof(u32), u32, u64>>>;
 
-        U n = i < 0 ? *b++ = '-', U(0) - U(i) : U(i);
+        // convert bool to int before test with unary + to silence warning if T happens to be bool
+        U const n = +i < 0 ? *b++ = '-', U(0) - U(i) : U(i);
 
         if (n < u32(1e2))
         {
@@ -143,31 +144,32 @@ namespace jeaiii
             return b + 10;
         }
 
+        // if we get here U must be u64 but some compilers don't know that, so reassign n to a u64 to avoid warnings
         u32 z = n % u32(1e8);
-        n /= u32(1e8);
+        u64 u = n / u32(1e8);
 
-        if (n < u32(1e2))
+        if (u < u32(1e2))
         {
-            // n can't be 1 digit (if n < 10 it would have been handled above as a 9 digit 32bit number)
-            *reinterpret_cast<pair*>(b) = digits.dd[n];
+            // u can't be 1 digit (if u < 10 it would have been handled above as a 9 digit 32bit number)
+            *reinterpret_cast<pair*>(b) = digits.dd[u];
             b += 2;
         }
-        else if (n < u32(1e6))
+        else if (u < u32(1e6))
         {
-            if (n < u32(1e4))
+            if (u < u32(1e4))
             {
-                auto f0 = u32(10 * 0x1p24 / 1e3 + 1) * n;
+                auto f0 = u32(10 * 0x1p24 / 1e3 + 1) * u;
                 *reinterpret_cast<pair*>(b) = digits.fd[f0 >> 24];
-                b -= n < u32(1e3);
+                b -= u < u32(1e3);
                 auto f2 = (f0 & mask24) * 100;
                 *reinterpret_cast<pair*>(b + 2) = digits.dd[f2 >> 24];
                 b += 4;
             }
             else
             {
-                auto f0 = u64(10 * 0x1p32 / 1e5 + 1) * n;
+                auto f0 = u64(10 * 0x1p32 / 1e5 + 1) * u;
                 *reinterpret_cast<pair*>(b) = digits.fd[f0 >> 32];
-                b -= n < u32(1e5);
+                b -= u < u32(1e5);
                 auto f2 = (f0 & mask32) * 100;
                 *reinterpret_cast<pair*>(b + 2) = digits.dd[f2 >> 32];
                 auto f4 = (f2 & mask32) * 100;
@@ -175,11 +177,11 @@ namespace jeaiii
                 b += 6;
             }
         }
-        else if (n < u32(1e8))
+        else if (u < u32(1e8))
         {
-            auto f0 = u64(10 * 0x1p48 / 1e7 + 1) * n >> 16;
+            auto f0 = u64(10 * 0x1p48 / 1e7 + 1) * u >> 16;
             *reinterpret_cast<pair*>(b) = digits.fd[f0 >> 32];
-            b -= n < u32(1e7);
+            b -= u < u32(1e7);
             auto f2 = (f0 & mask32) * 100;
             *reinterpret_cast<pair*>(b + 2) = digits.dd[f2 >> 32];
             auto f4 = (f2 & mask32) * 100;
@@ -188,11 +190,11 @@ namespace jeaiii
             *reinterpret_cast<pair*>(b + 6) = digits.dd[f6 >> 32];
             b += 8;
         }
-        else if (n < u64(0x1p32))
+        else if (u < u64(0x1p32))
         {
-            auto f0 = u64(10 * 0x1p57 / 1e9 + 1) * n;
+            auto f0 = u64(10 * 0x1p57 / 1e9 + 1) * u;
             *reinterpret_cast<pair*>(b) = digits.fd[f0 >> 57];
-            b -= n < u32(1e9);
+            b -= u < u32(1e9);
             auto f2 = (f0 & mask57) * 100;
             *reinterpret_cast<pair*>(b + 2) = digits.dd[f2 >> 57];
             auto f4 = (f2 & mask57) * 100;
@@ -205,20 +207,20 @@ namespace jeaiii
         }
         else
         {
-            u32 y = n % u32(1e8);
-            n /= u32(1e8);
+            u32 y = u % u32(1e8);
+            u /= u32(1e8);
 
-            // n is 2, 3, or 4 digits (if n < 10 it would have been handled above)
-            if (n < u32(1e2))
+            // u is 2, 3, or 4 digits (if u < 10 it would have been handled above)
+            if (u < u32(1e2))
             {
-                *reinterpret_cast<pair*>(b) = digits.dd[n];
+                *reinterpret_cast<pair*>(b) = digits.dd[u];
                 b += 2;
             }
             else
             {
-                auto f0 = u32(10 * 0x1p24 / 1e3 + 1) * n;
+                auto f0 = u32(10 * 0x1p24 / 1e3 + 1) * u;
                 *reinterpret_cast<pair*>(b) = digits.fd[f0 >> 24];
-                b -= n < u32(1e3);
+                b -= u < u32(1e3);
                 auto f2 = (f0 & mask24) * 100;
                 *reinterpret_cast<pair*>(b + 2) = digits.dd[f2 >> 24];
                 b += 4;
