@@ -226,7 +226,7 @@ namespace jeaiii
                 b += 4;
             }
             // do 8 digits
-            auto f0 = u64(10 * u64(0x1p48) / u64(1e7) + 1) * y >> 16;
+            auto f0 = (u64(0x1p48 / 1e6 + 1) * y >> 16) + 1;
             *reinterpret_cast<pair*>(b) = digits.dd[f0 >> 32];
             auto f2 = (f0 & mask32) * 100;
             *reinterpret_cast<pair*>(b + 2) = digits.dd[f2 >> 32];
@@ -237,7 +237,7 @@ namespace jeaiii
             b += 8;
         }
         // do 8 digits
-        auto f0 = u64(10 * u64(0x1p48) / u64(1e7) + 1) * z >> 16;
+        auto f0 = (u64(0x1p48 / 1e6 + 1) * z >> 16) + 1;
         *reinterpret_cast<pair*>(b) = digits.dd[f0 >> 32];
         auto f2 = (f0 & mask32) * 100;
         *reinterpret_cast<pair*>(b + 2) = digits.dd[f2 >> 32];
