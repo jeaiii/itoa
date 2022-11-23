@@ -1,4 +1,5 @@
 # itoa - Fast integer to ascii / integer to string conversion
+![windows](https://github.com/jeaiii/itoa/actions/workflows/msbuild.yml/badge.svg)
 - newest version: [jeaiii_to_text.h](include/itoa/jeaiii_to_text.h)
 - **0 dependency** header only - as in absolutely no dependencies on ANY other headers
 - **fast** - fasted tested on vs2019 in x86 and x64 for all digit lengths, uniform random bits, and uniform random digit lengths (latest version is even **25%** faster than before) using https://github.com/jeaiii/itoa-benchmark
