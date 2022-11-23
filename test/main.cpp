@@ -26,6 +26,7 @@ SOFTWARE.
 #include <stdlib.h>
 #include <iostream>
 #include <string>
+#include <random>
 
 #include "../include/itoa/jeaiii_to_text.h"
 
@@ -67,6 +68,7 @@ void show(T n) {
     std::cout << text << "\n";
 }
 
+
 int main()
 {
 #if 0
@@ -74,6 +76,25 @@ int main()
     do {
         uint32_t n = uint32_t(i);
         same(n);
+        i += 1;
+    } while (i < 1ULL << 32);
+#endif
+
+#if 0
+    // Eausted tests for 64bits are impossible,
+    // so test upper 32bits only
+    // TODO: fill lower 32bits with random value
+    uint64_t i = 0;
+    uint64_t tick = 1024*1024*16;
+    do {
+        uint64_t n = (i << 32);
+        same(n);
+        if ((i % tick) == 0) {
+           std::cout << n << " ";
+           show(n);
+          
+           std::cout << "tested " << i << " of " << (1ull << 32ull) << "\n";
+        }
         i += 1;
     } while (i < 1ULL << 32);
 #endif
