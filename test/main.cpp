@@ -52,12 +52,15 @@ bool check(const char* b, uint64_t n) {
     return u == n;
 }
 
+int failure = 0;
+
 void same(uint64_t n)
 {
     char text[32];
     to_string(text, n);
     if (!check(text, n)) {
         std::cout << "FAILURE: " << text << " != " << n << "\n";
+        failure = 1;
     }
 }
 
@@ -68,6 +71,12 @@ void show(T n) {
     std::cout << text << "\n";
 }
 
+template<class T>
+void test(T n)
+{
+    show(n);
+    same(n);
+}
 
 int main()
 {
@@ -99,11 +108,14 @@ int main()
     } while (i < 1ULL << 32);
 #endif
 
+    // test all powers of 2 and 10, -1, +1, +5
     for (int b : { 2, 10 })
-        for (uint64_t u = 1, p = u; u >= p; p = u, u *= b) {
-            show(u - 1), same(u - 1);
-            show(u), same(u);
-            show(u + 1), same(u + 1);
+        for (uint64_t u = 1, p = u; u >= p; p = u, u *= b)
+        {
+            test(u - 1);
+            test(u);
+            test(u + 1);
+            test(u + 5);
         }
 
     uint32_t tests[] = {
@@ -112,32 +124,39 @@ int main()
     };
 
     for (auto u : tests)
-        show(u), same(u);
+        test(u), test(u);
 
-    show(-1);
-    show(1 << 31);
-    show(0x7fffffff);
-    show(-0x7fffffff - 1);
+    test(-1);
+    test(1 << 31);
+    test(0x7fffffff);
+    test(-0x7fffffff - 1);
 
-    show(99900000000ULL);
-    show(99900000001ULL);
-    show(99900000009ULL);
+    test(1000000000900000000ULL);
+    test(1000000000800000001ULL);
+    test(1000000000700000002ULL);
+    test(1000000000600000003ULL);
+    test(1000000000500000004ULL);
+    test(1000000000400000005ULL);
+    test(1000000000300000006ULL);
+    test(1000000000200000007ULL);
+    test(1000000000100000008ULL);
+    test(1000000000000000009ULL);
 
-    show(99901000000ULL);
-    show(99901000001ULL);
-    show(99901000009ULL);
+    test(999010000000ULL);
+    test(999010000001ULL);
+    test(999010000009ULL);
 
-    show(99909000000ULL);
-    show(99909000001ULL);
-    show(99909000009ULL);
+    test(99909000000ULL);
+    test(99909000001ULL);
+    test(99909000009ULL);
 
-    show(99909000009LL);
-    show(-99909000009LL);
+    test(99909000009LL);
+    test(-99909000009LL);
 
-    show(17999999999999999999ULL);
+    test(17999999999999999999ULL);
 
-    show(5999999999999999999LL);
-    show(-5999999999999999999LL);
+    test(5999999999999999999LL);
+    test(-5999999999999999999LL);
 
-    return 0;
+    return failure + 1;
 }
