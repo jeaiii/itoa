@@ -100,7 +100,7 @@ int main()
 #endif
 
     for (int b : { 2, 10 })
-        for (uint32_t u = 1, p = u; u >= p; p = u, u *= b) {
+        for (uint64_t u = 1, p = u; u >= p; p = u, u *= b) {
             show(u - 1), same(u - 1);
             show(u), same(u);
             show(u + 1), same(u + 1);
