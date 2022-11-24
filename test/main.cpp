@@ -46,15 +46,29 @@ void to_string(char* str, unsigned short n) { *jeaiii::to_text_from_integer(str,
 void to_string(char* str, unsigned long n) { *jeaiii::to_text_from_integer(str, n) = '\0'; }
 void to_string(char* str, unsigned long long n) { *jeaiii::to_text_from_integer(str, n) = '\0'; }
 
-bool check(const char* b, uint64_t n) {
+template <class T>
+bool check(const char* b, T n) {
     uint64_t u = 0;
+
+    if (n < 0)
+    {
+        if (b[0] != '-')
+            return false;
+        ++b;
+    }
+
     for (; *b; ++b) u = u * 10 + (*b - '0');
+
+    if (n < 0)
+        return T(~u + 1) == n;
+
     return u == n;
 }
 
 int failure = 0;
 
-void same(uint64_t n)
+template <class T>
+void same(T n)
 {
     char text[32];
     to_string(text, n);
@@ -64,7 +78,7 @@ void same(uint64_t n)
     }
 }
 
-template <typename T>
+template <class T>
 void show(T n) {
     char text[32];
     to_string(text, n);
@@ -158,5 +172,5 @@ int main()
     test(5999999999999999999LL);
     test(-5999999999999999999LL);
 
-    return failure + 1;
+    return failure;
 }
